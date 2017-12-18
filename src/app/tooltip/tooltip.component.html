@@ -1,0 +1,14 @@
+<p>
+  tooltip works!
+</p>
+
+<app-tooltip-popup text="button A click" *ngIf="btnAClick" buttonClick="{{btnAClick || btnBClick}}"></app-tooltip-popup>
+<button (click)="onButtonClick('btna')">button A</button>
+
+<p></p>
+<app-tooltip-popup text="button B click" *ngIf="btnBClick" buttonClick="btnAClick || btnBClick"></app-tooltip-popup>
+<button  (click)="onButtonClick('btnb')">button B</button>
+
+<div class='long-padding'>
+  some text
+</div>
