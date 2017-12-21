@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-tooltip',
@@ -6,26 +6,44 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tooltip.component.scss']
 })
 export class TooltipComponent implements OnInit {
-  btnAClick: boolean;
-  btnBClick: boolean;
-  constructor() { }
+  showA: boolean;
+  showB: boolean;
+  btnClick: boolean;
+  constructor(private elRef: ElementRef) { }
 
   ngOnInit() {
-    this.btnAClick = false;
-    this.btnBClick = false;
+    this.btnClick = false;
+    this.showA = false;
+    this.showB = false;
   }
 
   onButtonClick(button: string) {
+    this.hideAll();
+    //console.log(this.elRef.nativeElement.offsetTop);
     switch (button) {
       case 'btna':
-        this.btnAClick = true;
-        this.btnBClick = false;
+        this.showA = true;
         break;
       case 'btnb':
-        this.btnAClick = false;
-        this.btnBClick = true;
+        this.showB = true;
         break;
     }
+    this.btnClick = true;
+    console.log('btn2', this.btnClick)
+    
+  }
 
+  hideAll() {
+    this.showA = false;
+    this.showB = false;
+  }
+
+  show(isInside:boolean){
+    if(!isInside && !this.btnClick){
+      this.hideAll();
+    }
+    else{
+      this.btnClick = false;
+    }
   }
 }
